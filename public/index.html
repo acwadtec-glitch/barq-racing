@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#111827" />
+  <title>سباق البرق</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <button class="brand" data-action="home" aria-label="العودة للرئيسية">
+        <span class="brand-mark">⚡</span>
+        <span><strong>سباق</strong> البرق</span>
+      </button>
+      <div class="topbar-tools">
+        <span class="connection-pill" id="connection-pill"><i></i><span>وضع فردي</span></span>
+        <button class="icon-btn" data-action="toggle-sound" aria-label="الصوت">🔊</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="screen active" id="screen-home">
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <div class="eyebrow"><span>لعبة سباق عربية</span><span class="eyebrow-dot"></span><span>جاهز للانطلاق؟</span></div>
+            <h1>خلي الطريق<br /><em>يتكلم عنك.</em></h1>
+            <p class="hero-subtitle">اختار عربيتك وسائقك وطريقك، واثبت إنك أسرع واحد على الأسفلت.</p>
+            <div class="hero-actions">
+              <button class="btn btn-primary btn-large" data-action="choose-mode" data-mode="offline">ابدأ السباق <span>←</span></button>
+              <button class="btn btn-ghost btn-large" data-action="choose-mode" data-mode="online"><span class="online-dot"></span> العب أونلاين</button>
+            </div>
+            <div class="hero-stats">
+              <div><strong>03</strong><span>طرق مختلفة</span></div>
+              <div><strong>04</strong><span>سائقين مميزين</span></div>
+              <div><strong>∞</strong><span>سباقات وحماس</span></div>
+            </div>
+          </div>
+          <div class="hero-visual">
+            <div class="sun-glow"></div>
+            <div class="hero-cloud cloud-one"></div>
+            <div class="hero-cloud cloud-two"></div>
+            <div class="mountain mountain-back"></div>
+            <div class="mountain mountain-front"></div>
+            <div class="hero-road"><span></span><span></span><span></span></div>
+            <div class="hero-car car-red"><div class="car-window"></div><div class="car-light"></div></div>
+            <div class="hero-car car-blue"><div class="car-window"></div><div class="car-light"></div></div>
+            <div class="speed-line line-1"></div><div class="speed-line line-2"></div><div class="speed-line line-3"></div>
+            <div class="visual-label"><span>01</span><strong>السرعة<br />مش كل حاجة</strong></div>
+          </div>
+        </div>
+        <div class="mode-strip">
+          <button class="mode-tile" data-action="choose-mode" data-mode="offline">
+            <span class="tile-icon">🎮</span><span><strong>أوفلاين</strong><small>ضد الكمبيوتر أو صاحبك على نفس الجهاز</small></span><b>←</b>
+          </button>
+          <button class="mode-tile mode-tile-dark" data-action="choose-mode" data-mode="online">
+            <span class="tile-icon">🌐</span><span><strong>أونلاين</strong><small>اعمل غرفة وابعت الكود لصاحبك</small></span><b>←</b>
+          </button>
+        </div>
+      </section>
+
+      <section class="screen" id="screen-setup">
+        <div class="section-heading">
+          <div><button class="back-link" data-action="home">→ الرئيسية</button><h2>جهّز سباقك</h2><p>اختار كل حاجة على مزاجك، وبعدها دوس انطلاق.</p></div>
+          <div class="step-badge"><span>الخطوة</span><strong>01</strong><span>/ 01</span></div>
+        </div>
+        <div class="setup-layout">
+          <div class="selection-column">
+            <section class="selection-block">
+              <div class="selection-title"><span class="number">01</span><div><h3>اختار الطريق</h3><p>كل طريق له تحديه</p></div></div>
+              <div class="cards-grid cards-grid-tracks" id="track-cards"></div>
+            </section>
+            <section class="selection-block">
+              <div class="selection-title"><span class="number">02</span><div><h3>اختار السائق</h3><p>مهارات مختلفة، أسلوب واحد: الفوز</p></div></div>
+              <div class="cards-grid cards-grid-drivers" id="driver-cards"></div>
+            </section>
+            <section class="selection-block">
+              <div class="selection-title"><span class="number">03</span><div><h3>اختار العربية</h3><p>ظبط سرعتك وتحكمك</p></div></div>
+              <div class="cards-grid cards-grid-cars" id="car-cards"></div>
+            </section>
+          </div>
+          <aside class="selection-summary">
+            <div class="summary-sticky">
+              <div class="summary-kicker">اختياراتك</div>
+              <div class="preview-car" id="preview-car"><div class="preview-window"></div><div class="preview-wheel wheel-a"></div><div class="preview-wheel wheel-b"></div></div>
+              <h3 id="summary-car">الصاعقة</h3><p id="summary-driver">مع نور</p>
+              <div class="summary-track"><span id="summary-track-icon">🏜️</span><div><small>الطريق</small><strong id="summary-track">الصحراء الذهبية</strong></div></div>
+              <div class="stat-bars" id="summary-stats"></div>
+              <div class="offline-options" id="offline-options">
+                <div class="mini-heading">طريقة اللعب</div>
+                <div class="option-row"><button class="play-option selected" data-local-mode="bot"><span>🤖</span><b>ضد الكمبيوتر</b><small>سائق ذكي</small></button><button class="play-option" data-local-mode="local"><span>👥</span><b>لاعبين</b><small>نفس الجهاز</small></button></div>
+                <button class="btn btn-primary full-btn" data-action="start-offline">انطلق الآن <span>←</span></button>
+              </div>
+              <div class="online-options hidden" id="online-options">
+                <div class="mini-heading">اسم السائق</div>
+                <input class="text-input" id="player-name" maxlength="18" placeholder="اكتب اسمك هنا" value="سائق البرق" />
+                <div class="online-buttons"><button class="btn btn-primary" data-action="create-room">إنشاء غرفة</button><button class="btn btn-outline" data-action="show-join">دخول بكود</button></div>
+                <div class="join-box hidden" id="join-box"><input class="text-input code-input" id="room-code" maxlength="6" placeholder="مثال: 4FA2B1" /><button class="btn btn-dark full-btn" data-action="join-room">انضم للغرفة</button></div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="screen" id="screen-lobby">
+        <div class="lobby-card">
+          <div class="lobby-top"><button class="back-link" data-action="leave-room">→ الخروج من الغرفة</button><span class="live-label"><i></i> غرفة خاصة</span></div>
+          <div class="lobby-heading"><span class="lobby-icon">🏁</span><div><h2>الغرفة جاهزة</h2><p>ابعت الكود لصاحبك واستنى لما يدخل.</p></div></div>
+          <div class="room-code-box"><span>كود الغرفة</span><strong id="room-code-display">------</strong><button data-action="copy-code">نسخ الكود</button></div>
+          <div class="players-list" id="players-list"></div>
+          <div class="lobby-actions"><button class="btn btn-primary btn-large" id="ready-button" data-action="toggle-ready">أنا جاهز <span>✓</span></button><p id="lobby-hint">محتاجين سائقين عشان يبدأ السباق.</p></div>
+        </div>
+      </section>
+
+      <section class="screen game-screen" id="screen-game">
+        <div class="race-topbar">
+          <div class="race-track-name"><span id="race-track-icon">🏜️</span><div><small>الطريق الحالي</small><strong id="race-track-name">الصحراء الذهبية</strong></div></div>
+          <div class="race-progress"><div class="progress-label"><span>التقدم</span><strong id="progress-text">0%</strong></div><div class="progress-track"><i id="progress-bar"></i></div></div>
+          <div class="race-time"><small>الوقت</small><strong id="race-time">00:00</strong></div>
+          <button class="icon-btn pause-btn" data-action="pause-race" aria-label="إيقاف مؤقت">Ⅱ</button>
+        </div>
+        <div class="race-stage-wrap"><div class="race-stage" id="race-stage"><canvas id="race-canvas" width="1100" height="650"></canvas><div class="countdown" id="countdown"></div><div class="pause-overlay hidden" id="pause-overlay"><div><span>⏸</span><h2>السباق متوقف</h2><button class="btn btn-primary" data-action="resume-race">كمّل السباق</button></div></div><div class="race-toast" id="race-toast"></div></div></div>
+        <div class="race-bottom">
+          <div class="driver-hud"><span class="hud-avatar" id="hud-avatar">🏎️</span><div><small id="hud-driver">نور</small><strong id="hud-car">الصاعقة</strong></div></div>
+          <div class="control-hint" id="control-hint"><span>التحكم</span><b>↑ ↓ ← →</b><small>حرّك العربية وتفادى العوائق</small></div>
+          <div class="speed-hud"><strong id="speed-value">0</strong><span>كم/س</span></div>
+        </div>
+        <div class="touch-controls" id="touch-controls"><button data-key="ArrowRight">→</button><button data-key="ArrowUp">↑</button><button data-key="ArrowDown">↓</button><button data-key="ArrowLeft">←</button></div>
+      </section>
+
+      <section class="screen" id="screen-result">
+        <div class="result-card"><div class="confetti confetti-a"></div><div class="confetti confetti-b"></div><div class="result-kicker" id="result-kicker">نهاية السباق</div><div class="result-trophy" id="result-trophy">🏆</div><h2 id="result-title">أنت البطل!</h2><p id="result-subtitle">أداء قوي على الطريق.</p><div class="result-stats"><div><span>الترتيب</span><strong id="result-rank">01</strong></div><div><span>الوقت</span><strong id="result-time">00:00</strong></div><div><span>الطريق</span><strong id="result-track">—</strong></div></div><div class="result-actions"><button class="btn btn-primary btn-large" data-action="restart-race">سباق تاني <span>↻</span></button><button class="btn btn-ghost btn-large" data-action="home">الرئيسية</button></div></div>
+      </section>
+    </main>
+    <div class="toast" id="toast" role="status"></div>
+  </div>
+  <script src="game.js"></script>
+</body>
+</html>
