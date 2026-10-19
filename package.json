@@ -1,0 +1,13 @@
+{
+  "name": "barq-racing",
+  "version": "1.0.0",
+  "private": true,
+  "description": "لعبة سباق عربية تعمل أوفلاين وأونلاين بالغرف",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "ws": "^8.18.0"
+  }
+}
